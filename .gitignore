@@ -1,0 +1,14 @@
+# Python cache (e.g., mkdocs or Jekyll)
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Build artifacts
+_site/

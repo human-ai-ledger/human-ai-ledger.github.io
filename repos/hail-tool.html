@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hail-tool - Human–AI Ledger</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../HAIL-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../HAIL-16.png">
+</head>
+<header>
+  <a href="https://human-ai-ledger.github.io/">
+    <img src="../HAIL.png" alt="HAIL Logo" style="height:80px; width:auto;">
+  </a>
+  <h1>hail-tool</h1>
+  <p>Python library and CLI for the Human–AI Ledger (HAIL) v1.0 — structured, traceable, reproducible human–AI collaboration</p>
+  <p>
+    GitHub: <a href="https://github.com/human-ai-ledger/hail-tool">hail-tool repo</a> |
+    DOI: <a href="https://doi.org/10.5281/zenodo.17597705">Zenodo record</a>
+  </p>
+</header>
+<section>
+  <h2>Overview</h2>
+  <p>hail-tool is the core capture layer of the HAIL ecosystem. AI driver integrations 
+     (hail-ollama, hail-claude, hail-openai, etc.) rely on <code>HAILSession</code> 
+     from <code>hail_tool.api</code> instead of implementing their own ledger logic.</p>
+</section>
+<section>
+  <h2>Citation</h2>
+  <p>Troendle, E.P. (2026). Human–AI Ledger (HAIL): A Structured Workflow for Traceable, Reproducible Human–AI Collaboration. Zenodo. 
+     <a href="https://doi.org/10.5281/zenodo.17597705">DOI link</a></p>
+</section>
+<section>
+  <h2>Installation</h2>
+  <p><code>pip install hail-tool</code></p>
+  <p>Or from source:</p>
+  <pre>
+git clone https://github.com/human-ai-ledger/hail-tool
+cd hail-tool
+pip install -e .
+  </pre>
+</section>
+<section>
+  <h2>Quick Start</h2>
+  <pre>
+# Start a new session in your project directory
+hail init
+
+# Log a checkpoint during your work
+hail checkpoint
+
+# Sign off, generate & validate the Session Ledger YAML
+hail signoff
+
+# Export a Markdown report
+hail signoff --export-md
+  </pre>
+</section>
+<section>
+  <h2>Python API</h2>
+  <pre>
+from hail_tool.api import HAILSession
+
+session = HAILSession(model_version="your-model", gdpr=True)
+
+session.sign_on(
+    identity_raw="Your Name",
+    core_values=["transparency", "open science"],
+    cognitive_style="iterative",
+    communication_style="structured",
+    ethical_orientation="responsible AI use",
+    creative_orientation="co-creative",
+    purpose="Your research purpose",
+    goal="Session objective",
+    constraints="none",
+)
+
+session.checkpoint(
+    ai_contribution="What the AI did",
+    human_contribution="What you provided or decided",
+    reflections="Observations, tensions, insights",
+)
+
+path = session.sign_off(
+    final_reflection="Summary of session.",
+    summary="High-level aggregate of objectives.",
+)
+
+result = session.validate()
+print(result.summary())
+  </pre>
+</section>
+
+<section>
+  <h2>Session Ledgers</h2>
+  <p>Finalised ledgers are saved to:</p>
+  <pre>.hail/sessions/HAIL_session_&lt;YYYYMMDD_HHMMSS&gt;.yaml</pre>
+  <p>Recommended <code>.gitignore</code> entry for in-progress sessions:</p>
+  <pre>.hail/sessions/.current_session.yaml</pre>
+  <p>Commit finalised <code>HAIL_session_*.yaml</code> files with your code for full reproducibility.</p>
+</section>
+
+<section>
+  <h2>GDPR Safe Mode</h2>
+<p>By default (--gdpr), identity is SHA-256 hashed before writing to the ledger. Use --no-gdpr for raw identifiers.</p>
+</section>
+
+<section>
+  <h2>Ecosystem</h2>
+  <ul>
+    <li><strong>HAIL:</strong> Normative schema and workflow</li>
+    <li><strong>hail-tool:</strong> Core capture layer — library & CLI</li>
+    <li><strong>hail-ollama:</strong> Offline driver using local Ollama models</li>
+    <li><strong>hail-claude:</strong> Planned driver for Anthropic Claude API</li>
+    <li><strong>hail-openai:</strong> Planned driver for OpenAI API</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Licence</h2>
+  <p>hail-tool is free software released under the AGPL-3.0.  
+     For proprietary environments, see <code>COMMERCIAL.md</code>.</p>
+</section>
